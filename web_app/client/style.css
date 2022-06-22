@@ -1,0 +1,256 @@
+body,
+html {
+  height: 90%;
+}
+
+.img {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(148, 79, 1, 0.373),
+      rgba(97, 55, 1, 0.599)
+    ),
+    url("https://im.proptiger.com/1/668331/6/aishwaryam-elevation-10389533.jpeg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-size: 100% 100%;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.title {
+  font-size: 50px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+
+.title:hover {
+  transition: 0.5s;
+  color: #d86d02;
+}
+
+input[type="number"],
+select option {
+  background-color: #d86d02;
+  color: white;
+}
+
+.sqft,
+.bath,
+.bhk,
+.loc {
+  color: #ffffff;
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 32px;
+  margin: 0 0 24px;
+}
+
+.switch-field {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 36px;
+  overflow: hidden;
+}
+
+.switch-field input {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+  border: 0;
+  overflow: hidden;
+}
+
+.switch-field label {
+  background-color: #d86d02;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+  padding: 8px 16px;
+  margin-right: -1px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+  cursor: pointer;
+}
+
+.switch-field input:checked + label {
+  background-color: #ffffff;
+  box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+  border-radius: 0 4px 4px 0;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+input {
+  font-family: "Raleway", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  outline: 0;
+  width: 76%;
+  border: 0;
+  margin: 0 0 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.location {
+  /* text-indent: 30%; */
+  width: 70%;
+  /* margin-left: 10px; */
+  padding: 8px;
+  color: #fff;
+  background-color: #d86d02;
+  position: relative;
+  display: inline-block;
+  transform: scale(1.1);
+}
+
+.location:after {
+  transition: 0.2s;
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+.submit {
+  margin-top: 20px;
+  width: 76%;
+  color: rgb(0, 0, 0);
+  border: 2px solid #d86d02;
+  border-radius: 0px;
+  padding: 18px 36px;
+  display: inline-block;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 #d86d02;
+  transition: ease-out 0.4s;
+}
+
+.submit:hover {
+  box-shadow: inset 100ch 0 0 0 #d86d02;
+}
+
+.result {
+  background: #d86d02;
+  color: white;
+  width: 80%;
+  border: 0;
+  margin: 25px 0 0 0;
+  box-sizing: border-box;
+  font-size: 15px;
+  height: 3em;
+  text-align: center;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 10em;
+  height: 25px;
+  background: #fdbf73;
+  outline: none;
+  /* opacity: 0.7; */
+  /* -webkit-transition: 0.2s;
+  transition: opacity 0.2s; */
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #d86d02;
+  cursor: pointer;
+}
+
+.form {
+  font-family: "Raleway", sans-serif;
+  font-weight: normal;
+  line-height: 1.625;
+  margin-left: 30%;
+  margin-right: 30%;
+  /* padding-left: 16px; */
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-2 {
+  font-family: "Raleway", sans-serif;
+  font-weight: normal;
+  line-height: 1.625;
+  margin-left: 30%;
+  margin-right: 30%;
+  /* padding-left: 16px; */
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 50px;
+}
+
+h2 {
+  color: #ffffff;
+  font-family: "Raleway", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  text-shadow: #d86d02;
+}
+output {
+  color: #fef7f2;
+  font-family: "Raleway", sans-serif;
+  font-size: 25px;
+  font-weight: 1000;
+  text-align: center;
+  width: 20%;
+  height: 40%;
+  background-color: rgb(147, 84, 2);
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 200px;
+}
+
+input {
+  width: 100%;
+}
+
+.result-text {
+  margin: 0 !important;
+}
