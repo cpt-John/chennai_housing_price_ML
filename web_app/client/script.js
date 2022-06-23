@@ -29,11 +29,11 @@ const field_data = {
       "Ann Nagar",
     ],
   },
-  INT_SQFT: { f_name: "Interior Sq.Ft", type: "input", range: [100, 10000] },
+  INT_SQFT: { f_name: "Interior Sq.Ft", type: "input", range: [100, 4000] },
   DATE_SALE: { f_name: "Sale Date", type: "date" },
   N_BEDROOM: { f_name: "Bedrooms", type: "slider", range: [1, 10] },
   N_BATHROOM: { f_name: "Bathrooms", type: "slider", range: [1, 10] },
-  N_ROOM: { f_name: "Total Rooms", type: "slider", range: [1, 25] },
+  N_ROOM: { f_name: "Total Rooms", type: "slider", range: [2, 25] },
   SALE_COND: {
     f_name: "Sale Condition",
     type: "dropdown",
@@ -73,6 +73,8 @@ const components = {
   input: (object) => `<input
       class="input"
       type="number"
+      min="${object.range[0]}"
+      max="${object.range[1]}"
       class="floatLabel"
       name="Squareft"
       value="1000"
@@ -108,7 +110,6 @@ const components = {
       value="${object.range[0]}"
       class="slider"
       id="${object.id}"
-      oninput="this.nextElementSibling.value = this.value"
     /><output>${object.range[0]}</output>`,
 
   date: (object) => `<input type="date"  value="2010-12-31"
@@ -131,6 +132,16 @@ function getValues() {
     object[e] = correct_dt_fmt(object[e]);
   });
   return object;
+}
+
+function updateNRooms() {
+  const n_room = Number($(`#N_BEDROOM`).val()) + Number($(`#N_BATHROOM`).val());
+  const current = $(this);
+  current.next().html(current.val());
+  if (n_room > Number($(`#N_ROOM`).val())) {
+    $(`#N_ROOM`).val(String(n_room));
+    $(`#N_ROOM`).next().val(String(n_room));
+  }
 }
 
 function onClickedEstimatePrice() {
@@ -159,6 +170,9 @@ function onPageLoad() {
     html = `<div class="component">${header}${html}</div>`;
     $("#form").append(html);
   }
+  ["N_BEDROOM", "N_BATHROOM", "N_ROOM"].forEach(function (e) {
+    $(`#${e}`).on("change", updateNRooms);
+  });
 }
 
 window.onload = onPageLoad;
