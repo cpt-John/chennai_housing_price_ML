@@ -11,7 +11,7 @@ from sklearn.metrics import r2_score
 
 #   load data
 
-file_name = "../train-chennai-sale.csv"
+file_name = "./train-chennai-sale.csv"
 df = pd.read_csv(file_name)
 
 #   drop null rows/redundant columns
