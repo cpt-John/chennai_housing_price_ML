@@ -1,0 +1,9 @@
+numpy==1.21.4
+pandas==1.4.1
+scikit-learn==1.0.2
+Flask==2.1.2
+gunicorn==20.1.0
+matplotlib==3.4.3
+seaborn==0.11.2
+kneed==0.7.0
+fuzzywuzzy==0.18.0
