@@ -135,16 +135,32 @@ function getValues() {
 }
 
 function updateNRooms() {
-  const n_room = Number($(`#N_BEDROOM`).val()) + Number($(`#N_BATHROOM`).val());
+  const n_room = Number($("#N_BEDROOM").val()) + Number($("#N_BATHROOM").val());
   const current = $(this);
   current.next().html(current.val());
-  if (n_room > Number($(`#N_ROOM`).val())) {
-    $(`#N_ROOM`).val(String(n_room));
-    $(`#N_ROOM`).next().val(String(n_room));
+  if (n_room > Number($("#N_ROOM").val())) {
+    $("#N_ROOM").val(String(n_room));
+    $("#N_ROOM").next().val(String(n_room));
+  }
+}
+
+function setDate() {
+  const b_date = new Date($("#DATE_BUILD").val()).getTime();
+  const s_date = new Date($("#DATE_SALE").val()).getTime();
+  if (b_date > s_date) {
+    $("#DATE_BUILD").val($("#DATE_SALE").val());
+  }
+}
+
+function setRange(range, element) {
+  const value = Number($(element).val());
+  if (!(value >= range[0] && value <= range[1])) {
+    $(element).val(range[0]);
   }
 }
 
 function onClickedEstimatePrice() {
+  estPriceRange = document.getElementById("uiEstimatedPriceRange");
   estPrice = document.getElementById("uiEstimatedPrice");
   const object = getValues();
   var url = "http://127.0.0.1:5000/predict_home_price";
@@ -156,9 +172,12 @@ function onClickedEstimatePrice() {
 
   formatter.format(2500);
   $.post(url, object, function (data) {
-    estPrice.innerHTML = `<h1 class="result-text">${formatter
-      .format(Number(data))
-      .replace(/^(\D+)/, "$1 ")}</h1>`;
+    // {'lower': 7219814,'mid': 767932,'upper': 803481}
+    for (const [key, value] of Object.entries(data)) {
+      data[key] = formatter.format(Number(value)).replace(/^(\D+)/, "$1 ");
+    }
+    estPriceRange.innerHTML = `<h1 class="result-text">${data.lower} - ${data.upper}</h1>`;
+    estPrice.innerHTML = `<h1 class="result-text">Fair price: ${data.mid}</h1>`;
   });
 }
 
@@ -172,6 +191,13 @@ function onPageLoad() {
   }
   ["N_BEDROOM", "N_BATHROOM", "N_ROOM"].forEach(function (e) {
     $(`#${e}`).on("change", updateNRooms);
+  });
+  ["DATE_SALE", "DATE_BUILD"].forEach(function (e) {
+    $(`#${e}`).on("change", setDate);
+  });
+  $("#INT_SQFT").on("change", function (event) {
+    const range = field_data["INT_SQFT"].range;
+    setRange(range, this);
   });
 }
 

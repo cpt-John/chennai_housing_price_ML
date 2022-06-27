@@ -6,6 +6,8 @@ import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.metrics import r2_score
+
 
 #   load data
 
@@ -149,25 +151,43 @@ X = add_cluster_label(X)
 
 #   Model
 
-model = GradientBoostingRegressor(
-    learning_rate=0.1, max_depth=4, n_estimators=200)
+class GradientBoostingRange():
+    def __init__(self, l_quantile=0.1, u_quantile=0.9):
+        kv_hp = {"learning_rate": 0.1, "max_depth": 4, "n_estimators": 200}
+        self.lower_model = GradientBoostingRegressor(loss="quantile",
+                                                     alpha=l_quantile, **kv_hp)
+        self.mid_model = GradientBoostingRegressor(
+            loss="squared_error", **kv_hp)
+        self.upper_model = GradientBoostingRegressor(loss="quantile",
+                                                     alpha=u_quantile, **kv_hp)
+
+    def fit(self, X_train, y_train):
+        self.lower_model.fit(X_train, y_train)
+        self.mid_model.fit(X_train, y_train)
+        self.upper_model.fit(X_train, y_train)
+        models = [self.lower_model, self.mid_model, self.upper_model]
+        scores = [r2_score(y_train, model.predict(X_train))for model in models]
+        print(scores, "\nModel Ready!")
+
+    def predict(self, X_predict):
+        predictions = {}
+        predictions['lower'] = self.lower_model.predict(X_predict)
+        predictions['mid'] = self.mid_model.predict(X_predict)
+        predictions['upper'] = self.upper_model.predict(X_predict)
+        return pd.DataFrame(predictions)
+
+
+model = GradientBoostingRange()
 model.fit(X, y)
-print(model.score(X, y))
 
 
-def predict(input_data):
-    # input_data =\
-    #     {'AREA': 'Karapakkam', 'INT_SQFT': 1004, 'DATE_SALE': '04-05-2011', 'N_BEDROOM': 1.0, 'N_BATHROOM': 1.0, 'N_ROOM': 3, 'SALE_COND': 'AbNormal',
-    #         'PARK_FACIL': 'Yes', 'DATE_BUILD': '15-05-1967', 'BUILDTYPE': 'Commercial', 'UTILITY_AVAIL': 'AllPub', 'STREET': 'Paved', 'MZZONE': 'A'}
-    input_dict = {k: [float(v)] if v.isnumeric() else [str(v)]
-                  for k, v in input_data.items()}
-    input_df = pd.DataFrame(input_dict)
+def predict(input_df):
     input_df = fix_dtpes(input_df)
     input_df = add_features(input_df)
     for cname in obj_cnames:
         input_df[cname] = input_df[cname].apply(transform_str)
     input_df.replace(label_map, inplace=True)
-    scaler.fit_transform(input_df)
+    scaler.transform(input_df)
     input_df = add_cluster_label(input_df)
-    result = model.predict(input_df)[0]
-    return round(result, 0)
+    result = model.predict(input_df)
+    return result

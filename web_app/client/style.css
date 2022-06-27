@@ -1,6 +1,6 @@
 body,
 html {
-  height: 90%;
+  height: 100%;
 }
 
 .img {
@@ -195,13 +195,14 @@ input {
   font-family: "Raleway", sans-serif;
   font-weight: normal;
   line-height: 1.625;
-  margin-left: 30%;
-  margin-right: 30%;
+  margin-left: 25%;
+  margin-right: 25%;
   /* padding-left: 16px; */
   z-index: 2;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  backdrop-filter: blur(5px);
 }
 
 .form-2 {
