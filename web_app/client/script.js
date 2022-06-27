@@ -116,6 +116,8 @@ const components = {
   min="01-01-1949" max="31-12-2030" id="${object.id}"/>`,
 };
 
+const base_url = window.location.href;
+
 function getValues() {
   const object = {};
   for (const field in field_data) {
@@ -163,8 +165,8 @@ function onClickedEstimatePrice() {
   estPriceRange = document.getElementById("uiEstimatedPriceRange");
   estPrice = document.getElementById("uiEstimatedPrice");
   const object = getValues();
-  var url = "http://127.0.0.1:5000/predict_home_price";
-  var formatter = new Intl.NumberFormat("en-IN", {
+  const url = `${base_url}/predict_home_price`;
+  const formatter = new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
     maximumSignificantDigits: 5,
