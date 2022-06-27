@@ -81,8 +81,6 @@ df.replace(mapping_obj, inplace=True)
 #   Add new features
 def add_features(df_):
     df_["AVG_ROOM_SIZE"] = (df_["INT_SQFT"]/df_["N_ROOM"]).round(0)
-    df_["N_OTHERROOM"] = df_["N_ROOM"] - \
-        (df_[["N_BEDROOM", "N_BATHROOM"]].sum(axis=1))
     df_["AGE"] = (df_["DATE_SALE"]-df_["DATE_BUILD"]).dt.days
     df_["MARKET_CRASH"] = pd.Series(np.zeros(df_.shape[0], dtype=np.int8))
     mask = (df_["DATE_SALE"] >=
@@ -156,8 +154,7 @@ class GradientBoostingRange():
         kv_hp = {"learning_rate": 0.1, "max_depth": 4, "n_estimators": 200}
         self.lower_model = GradientBoostingRegressor(loss="quantile",
                                                      alpha=l_quantile, **kv_hp)
-        self.mid_model = GradientBoostingRegressor(
-            loss="squared_error", **kv_hp)
+        self.mid_model = GradientBoostingRegressor(**kv_hp)
         self.upper_model = GradientBoostingRegressor(loss="quantile",
                                                      alpha=u_quantile, **kv_hp)
 
