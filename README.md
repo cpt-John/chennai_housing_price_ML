@@ -102,7 +102,11 @@ Find instructions to install the following software if you are not using web-bas
 
 ## Usage
 
-The `model.ipynb` file discusses the main ideas of data cleaning, plotting and EDA. Towards the end you will find the process of modelling and tuning parameters for best fit . Once you have understood the idea behind the modeling you can checkout the `web_app` director; This directory contains the files required for the deployment of the project on a server .
+The `model.ipynb` file discusses the main ideas of data cleaning, plotting and EDA. Towards the end you will find the process of modelling and tuning parameters for best fit . Once you have understood the idea behind the modeling you can checkout the `web_app` directory; This directory contains the files required for the deployment of the project on a server .
+
+### Note :
+
+The web_app directory will contain a `model.joblib` file which is the pickled model to save the time fitting the model during deployment , so delete this file if you want to refit the model
 
 ### Steps to start local development server
 
