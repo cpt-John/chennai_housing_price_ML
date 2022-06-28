@@ -7,7 +7,7 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import r2_score
-
+from joblib import dump, load
 
 #   load data
 
@@ -174,8 +174,16 @@ class GradientBoostingRange():
         return pd.DataFrame(predictions)
 
 
-model = GradientBoostingRange()
-model.fit(X, y)
+model = None
+try:
+    model = load('model.joblib')
+except:
+    print("Model dump loading failed!")
+    print("Refitting Model!")
+    model = GradientBoostingRange()
+    model.fit(X, y)
+    print('Dumping Model!')
+    dump(model, 'model.joblib')
 
 
 def predict(input_df):

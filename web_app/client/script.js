@@ -163,7 +163,7 @@ function setRange(range, element) {
 
 function onClickedEstimatePrice() {
   estPriceRange = document.getElementById("uiEstimatedPriceRange");
-  estPrice = document.getElementById("uiEstimatedPrice");
+  // estPrice = document.getElementById("uiEstimatedPrice");
   const object = getValues();
   const url = `${base_url}/predict_home_price`;
   const formatter = new Intl.NumberFormat("en-IN", {
@@ -174,12 +174,13 @@ function onClickedEstimatePrice() {
 
   formatter.format(2500);
   $.post(url, object, function (data) {
-    // {'lower': 7219814,'mid': 767932,'upper': 803481}
-    for (const [key, value] of Object.entries(data)) {
-      data[key] = formatter.format(Number(value)).replace(/^(\D+)/, "$1 ");
-    }
-    estPriceRange.innerHTML = `<h1 class="result-text">${data.lower} - ${data.upper}</h1>`;
-    estPrice.innerHTML = `<h1 class="result-text">Fair price: ${data.mid}</h1>`;
+    // {'lower': 7219814,'mid':7800000,'upper': 803481}
+    let values = [data["lower"], data["upper"]].sort();
+    values = values.map((value) => {
+      return formatter.format(Number(value)).replace(/^(\D+)/, "$1 ");
+    });
+    estPriceRange.innerHTML = `<h1 class="result-text">${values[0]} - ${values[1]}</h1>`;
+    // estPrice.innerHTML = `<h1 class="result-text">Fair price: ${data.mid}</h1>`;
   });
 }
 
