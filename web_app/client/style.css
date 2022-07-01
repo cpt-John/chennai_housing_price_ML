@@ -34,8 +34,7 @@ html {
   color: #d86d02;
 }
 
-input[type="number"],
-select option {
+input {
   background-color: #d86d02;
   color: white;
 }
@@ -107,18 +106,15 @@ input {
   font-size: 22px;
   font-weight: 500;
   outline: 0;
-  width: 76%;
   border: 0;
   margin: 0 0 10px;
   padding: 10px;
   box-sizing: border-box;
-  border-radius: 5px;
+  width: 100%;
 }
 
 .location {
-  /* text-indent: 30%; */
   width: 70%;
-  /* margin-left: 10px; */
   padding: 8px;
   color: #fff;
   background-color: #d86d02;
@@ -248,8 +244,14 @@ output {
   width: 200px;
 }
 
-input {
+input,
+.location {
   width: 100%;
+  border-radius: 36px;
+}
+select {
+  border: 0px;
+  outline: none;
 }
 
 .result-text {

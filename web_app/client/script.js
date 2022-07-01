@@ -28,7 +28,7 @@ const field_data = {
     ],
   },
   INT_SQFT: {
-    f_name: "Interior Sq.Ft\n400-2600",
+    f_name: "Int sq.ft.₍₄₀₀₋₂₆₀₀₎",
     type: "input",
     range: [400, 2600],
   },
@@ -77,7 +77,6 @@ const components = {
       type="number"
       min="${object.range[0]}"
       max="${object.range[1]}"
-      class="floatLabel"
       name="Squareft"
       value="1000"
       id="${object.id}"
