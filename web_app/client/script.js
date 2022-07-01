@@ -25,8 +25,6 @@ const field_data = {
       "Chrompet",
       "KK Nagar",
       "T Nagar",
-      "Velchery",
-      "Ann Nagar",
     ],
   },
   INT_SQFT: { f_name: "Interior Sq.Ft", type: "input", range: [100, 4000] },
