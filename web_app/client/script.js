@@ -27,7 +27,11 @@ const field_data = {
       "T Nagar",
     ],
   },
-  INT_SQFT: { f_name: "Interior Sq.Ft", type: "input", range: [400, 2600] },
+  INT_SQFT: {
+    f_name: "Interior Sq.Ft\n400-2600",
+    type: "input",
+    range: [400, 2600],
+  },
   DATE_SALE: { f_name: "Sale Date", type: "date" },
   N_BEDROOM: { f_name: "Bedrooms", type: "slider", range: [1, 6] },
   N_BATHROOM: { f_name: "Bathrooms", type: "slider", range: [1, 6] },
